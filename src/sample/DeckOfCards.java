@@ -1,29 +1,59 @@
 package sample;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DeckOfCards {
     private ArrayList<Card> deck;
 
     /**
-     * The constructor does not require any inputs, but must set
-     * all the facenames and suits
+     * The constructor will create the instance of the DeckOfCards
+     * class and initialize it with all the Card objects
      */
     public DeckOfCards()
     {
         deck = new ArrayList<>();
-        //loop through all the face names and all the suits
-        //to create Card objects and add them to the deck
-        List<String> faceNames = Card.getFaceNames();
+
+        //get lists of valid suits and face names
         List<String> suits = Card.getSuits();
+        List<String> faceNames = Card.getFaceNames();
+
+        //loop over all the suits and face names to create Card objects
         for (String suit : suits)
         {
-            for (String faceName : faceNames)
+            for (int i=0; i<faceNames.size();i++)
             {
-                Card newCard = new Card(faceName, suit);
-                deck.add(newCard);
+                Card card = new Card(faceNames.get(i), suit, i+2);
+                deck.add(card);
             }
         }
+    }
+
+    /**
+     * This method returns the number of cards in the deck
+     */
+    public int getNumOfCardsInDeck()
+    {
+        return deck.size();
+    }
+
+    /**
+     * This method will return the top card from the deck.  If the deck is empty
+     * it will return null
+     */
+    public Card dealTopCard()
+    {
+        if (deck.size()>0)
+            return deck.remove(0);
+        return null;
+    }
+
+    /**
+     * This method will shuffle the deck
+     */
+    public void shuffle()
+    {
+        Collections.shuffle(deck);
     }
 }

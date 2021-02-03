@@ -15,17 +15,22 @@ public class Controller implements Initializable {
     @FXML
     private Label messageLabel;
 
+    private DeckOfCards deckOfCards;
+
     /**
      * When the button is clicked, display something in the console
      */
     @FXML
     private void buttonPushed(){
-        messageLabel.setText("Here is a new message");
+        Card card = deckOfCards.dealTopCard();
+        messageLabel.setText(card.toString());
 
     }
 
+    /**This method is called when the scene loads*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        deckOfCards = new DeckOfCards();
         messageLabel.setText("");
     }
 }
